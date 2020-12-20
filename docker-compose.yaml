@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  secret-santa-bot:
+    build: .
+    env_file:
+      - .secret
+    volumes:
+      - ./data:/data
+    network_mode: "host"
