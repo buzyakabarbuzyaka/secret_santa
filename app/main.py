@@ -1,9 +1,9 @@
-from app.settings import TOKEN, DATA_DIR
+from app.settings import TOKEN
 import logging
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-from app.load import give_secret_name
+from app.load import give_secret_name, VK_MAP
 
 # Enable logging
 logging.basicConfig(
@@ -35,6 +35,7 @@ def bind(update: Update, context: CallbackContext):
             update.message.reply_text(f'Напоминаю, даришь подарок: {secret_name}')
         else:
             update.message.reply_text(f'Ты секретный санта для: {secret_name}')
+            update.message.reply_text(f'ВК: {VK_MAP[secret_name]}')
 
 
 def main():
@@ -51,19 +52,13 @@ def main():
     updater.start_polling()
     updater.idle()
 
-#TODO: БАГ если изменить list.csv и не удалить out.csv то все ёбается
-#TODO: Каждый может про себя что-то написать через бота (не пожелание)
-#TODO: Залистить полный список и тех у кого пока нет секретного санты
-#TODO: Мб мне дать возможность посмотреть кто еще не написал боту
-
-#TODO: В отвте вместе с именем передавать telegram_id
-
-
-
-#TODO: Комнаты для секретных подарков (разные списки)
+# TODO: БАГ если изменить list.csv и не удалить out.csv то все ёбается
+# TODO: Каждый может про себя что-то написать через бота (не пожелание)
+# TODO: Залистить полный список и тех у кого пока нет секретного санты
+# TODO: Мб мне дать возможность посмотреть кто еще не написал боту
+# TODO: В отвте вместе с именем передавать telegram_id
+# TODO: Комнаты для секретных подарков (разные списки)
 
 
 if __name__ == '__main__':
     main()
-
-

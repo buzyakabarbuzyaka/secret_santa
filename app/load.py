@@ -15,7 +15,7 @@ def make_clear_obfuscated_dict(path=None):
         path = DATA_DIR
     with open(join(path, "list.csv"), encoding='utf-8') as csv_file:
         raw_list = list(csv.reader(csv_file, delimiter=","))
-        return dict([(hash_string(t_id), '') for t_id, _ in raw_list])
+        return dict([(hash_string(t_id), '') for t_id, _, _ in raw_list])
 
 
 def update_from_out_file(obfuscated_dict, path=None):
@@ -40,10 +40,13 @@ def write_to_out_file(obfuscated_dict, path=None):
 def make_obfuscation_map(path=None):
     if path is None:
         path = DATA_DIR
+    obfuscation_map = None
+    vk_map = None
     with open(join(path, "list.csv"), encoding='utf-8') as csv_file:
-        raw_list = list(csv.reader(csv_file, delimiter=","))
-        obfuscation_map = dict([(hash_string(t_id), name) for t_id, name in raw_list])
-        return obfuscation_map
+        obfuscation_map = dict([(hash_string(t_id), name) for t_id, name, vk in csv.reader(csv_file, delimiter=",")])
+    with open(join(path, "list.csv"), encoding='utf-8') as csv_file:
+        vk_map = dict([(name, vk) for t_id, name, vk in csv.reader(csv_file, delimiter=",")])
+    return obfuscation_map, vk_map
 
 
 def init(path=None):
@@ -54,7 +57,7 @@ def init(path=None):
     return obfuscated_dict
 
 
-OBFUSCATION_MAP = make_obfuscation_map()
+OBFUSCATION_MAP, VK_MAP = make_obfuscation_map()
 _obfuscated_dict = init()
 
 
