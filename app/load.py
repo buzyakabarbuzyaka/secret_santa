@@ -84,6 +84,4 @@ def give_secret_name(telegram_id: str) -> Union[Tuple[bool, str], None]:
 if __name__ == '__main__':
     from pprint import pprint
     pprint(_obfuscated_dict)
-    telegram_id = '4'
-    print(give_secret_name(telegram_id))
 

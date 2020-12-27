@@ -33,6 +33,7 @@ def bind(update: Update, context: CallbackContext):
         is_already_given, secret_name = secret_answer
         if is_already_given:
             update.message.reply_text(f'Напоминаю, даришь подарок: {secret_name}')
+            update.message.reply_text(f'ВК: {VK_MAP[secret_name]}')
         else:
             update.message.reply_text(f'Ты секретный санта для: {secret_name}')
             update.message.reply_text(f'ВК: {VK_MAP[secret_name]}')
